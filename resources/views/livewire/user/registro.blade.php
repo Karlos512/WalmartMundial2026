@@ -8,6 +8,29 @@
 
         <form wire:submit.prevent="registrar" class="p-8 space-y-4 text-gray-700">
 
+            <div class="space-y-2">
+                <label class="text-[10px] font-black uppercase italic text-gray-500 tracking-widest">
+                    Tu Nickname para el Ranking
+                </label>
+                <div class="relative">
+                    <input wire:model.blur="nickname" type="text"
+                        placeholder="Ej: MasterGamer_99"
+                        class="w-full bg-gray-800 border {{ $errors->has('nickname') ? 'border-red-600' : 'border-gray-700' }} rounded-xl px-4 py-3 text-sm focus:border-red-600 focus:ring-0 transition-all uppercase italic font-bold">
+
+                    <!-- Icono de validación -->
+                    <div class="absolute right-4 top-3.5">
+                        @if($nickname && !$errors->has('nickname'))
+                            <i class="fas fa-check text-green-500 text-xs"></i>
+                        @elseif($errors->has('nickname'))
+                            <i class="fas fa-times text-red-600 text-xs"></i>
+                        @endif
+                    </div>
+                </div>
+                @error('nickname')
+                    <span class="text-[9px] text-red-600 font-black uppercase italic">{{ $message }}</span>
+                @enderror
+            </div>
+
             <!-- Nombre -->
             <div>
                 <label class="block text-xs font-black uppercase text-gray-500">Nombre(s)</label>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class Registro extends Component
 {
-    public $nombre, $paterno, $materno, $correo, $telefono, $fecha_nacimiento, $cp, $estado,$ciudad="",$colonia_seleccionada,$listcolonias= [], $password, $password_confirmation;
+    public $nickname,$nombre, $paterno, $materno, $correo, $telefono, $fecha_nacimiento, $cp, $estado,$ciudad="",$colonia_seleccionada,$listcolonias= [], $password, $password_confirmation;
     public $aceptar_terminos = false;
     public $aceptar_privacidad = false;
     public $mostrarModalTerminos = false;
@@ -17,6 +17,7 @@ class Registro extends Component
 
     protected $rules = [
         'nombre' => 'required|min:2',
+        'nickname' => 'required|string|min:3|max:20|unique:users,nickname',
         'paterno' => 'required|min:2',
         'materno' => 'required|min:2',
         'correo' => 'required|email|unique:users,email',
@@ -38,6 +39,11 @@ class Registro extends Component
         'aceptar_terminos.accepted' => 'Debes aceptar los términos y condiciones para participar.',
         'aceptar_privacidad.accepted' => 'Debes aceptar el aviso de privacidad.',
     ];
+
+    public function updatedNickname()
+    {
+        $this->validateOnly('nickname');
+    }
 
     public function updatedCp($value)
     {
@@ -66,6 +72,7 @@ class Registro extends Component
         $this->validate();
 
         $user = User::create([
+            'nickname' => $this->nickname,
             'name' => $this->nombre,
             'email' => $this->correo,
             'password' => Hash::make($this->password),
