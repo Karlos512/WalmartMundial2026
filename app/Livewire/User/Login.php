@@ -29,7 +29,7 @@ class Login extends Component
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->intended(route('/'));
+                return redirect()->intended(route('admin-dashboard'));
             }
 
             // dd($user);

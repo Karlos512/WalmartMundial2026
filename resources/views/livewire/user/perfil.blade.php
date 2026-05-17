@@ -5,7 +5,7 @@
         <div>
             <p class="text-red-600 font-black uppercase tracking-tighter text-xs">Panel de Participante</p>
             <h1 class="text-3xl font-black italic uppercase italic">
-                BIENVENIDO, <span class="text-white">{{ $username }}</span>
+                BIENVENIDO, <span class="text-white">{{ $nickname }}</span>
             </h1>
         </div>
 
@@ -29,7 +29,7 @@
                 <p class="text-gray-500 text-xs font-bold uppercase mb-8">Tienes intentos listos para usar</p>
 
                 <!-- Botón más pequeño y estilizado -->
-                <a href="/minijuego" class="inline-block bg-red-600 hover:bg-red-700 text-white font-black italic uppercase text-sm px-10 py-3 rounded-xl transition-all shadow-[0_10px_20px_rgba(220,38,38,0.2)] hover:scale-105 active:scale-95">
+                <a href="#" wire:click='saveScore()' class="inline-block bg-red-600 hover:bg-red-700 text-white font-black italic uppercase text-sm px-10 py-3 rounded-xl transition-all shadow-[0_10px_20px_rgba(220,38,38,0.2)] hover:scale-105 active:scale-95">
                     ¡A Jugar!
                 </a>
             </div>

@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Tickets;
+use App\Models\intentos;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,19 @@ class Perfil extends Component
 
     public $ticket,$nombre_archivo;
     public $mensaje = "";
-    public $username, $mejorPuntaje;
+    public $nickname, $mejorPuntaje;
     public $intentos=0;
+
+    public function mount()
+    {
+        $this->obtenerRecord();
+    }
+
+    public function obtenerRecord()
+    {
+        $this->mejorPuntaje = intentos::where('user_id', auth()->id())
+            ->max('puntaje') ?? 0;
+    }
 
     public function guardar()
     {
@@ -63,12 +75,24 @@ class Perfil extends Component
             ->sum('intentos_disponibles');
     }
 
+    public function saveScore(){
+        $score = rand (25, 525);
+
+        intentos::create([
+            'user_id' => Auth::user()->id,
+            // 'ticket_id' =>  null ,
+            'puntaje' => $score,
+            'status' => 'aprobado',
+        ]);
+    }
+
     public function render()
     {
 
         $user = Auth::user();
-        $this->mejorPuntaje = "354";
-        $this->username =  $user['name'].' '. $user['apellido_paterno'];
+        // $this->mejorPuntaje = "354";
+        $this->nickname =  $user['nickname'];
+
         $this->intentos = $this->getIntentosTotalesProperty();
         // return view('livewire.user.perfil', [
         //     'username' => $user->name ?? 'Jugador',

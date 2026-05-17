@@ -35,6 +35,6 @@ Route::post('logout',[Controller::class,'logout'])->name('logout');
 
 Route::get('admin',[AdminController::class,'LoginView'])->name('admin');
 
-Route::get('/admin/dashboard',[AdminController::class,'DashboardView'])->name('dashboard');
+Route::get('/admin/dashboard',[AdminController::class,'DashboardView'])->name('admin-dashboard');
 
 Route::get('/admin/settings',[AdminController::class,'SettingsView'])->name('settings');
