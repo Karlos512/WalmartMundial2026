@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nombre de tu Proyecto - El Reto</title>
+    @stack('styles')
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
     <style>
         /* Personalización de colores para que combine con tu marca */
         :root {
@@ -27,8 +29,8 @@
                 <a href="#premios" class="hover:text-brand transition">Premios</a>
                 <a href="#ranking" class="hover:text-brand transition">Ranking</a>
             </div>
-            <button class="bg-brand text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition">
-                ¡ÚNETE!
+            <button onclick="window.location='{{ route('login') }}'" class="bg-brand text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition">
+                Login
             </button>
         </div>
     </nav>

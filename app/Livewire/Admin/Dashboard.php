@@ -16,8 +16,6 @@ class Dashboard extends Component
     $recordGlobal,
     $ultimosUsuarios=[];
 
-
-
     public function index()
     {
         // 1. Estadísticas Generales

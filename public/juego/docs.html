@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/favicon.png" type="image/x-icon">
+    <title>Pop Candy - Game Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f6ff;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #ff7eb3, #b088ff);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            border-bottom: 2px solid #b088ff;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            color: #6200ea;
+        }
+        
+        h3 {
+            color: #8844ee;
+            margin-top: 25px;
+        }
+        
+        code {
+            background-color: #f0e7ff;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #f0e7ff;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #b088ff;
+        }
+        
+        .important {
+            background-color: #ffe8f0;
+            border-left: 4px solid #ff7eb3;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #e9dfff;
+        }
+        
+        tr:hover {
+            background-color: #f0e7ff;
+        }
+        
+        .file-path {
+            background-color: #e3f2fd;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .toc {
+            background-color: #f5f0ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            text-decoration: none;
+            color: #6200ea;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        #top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #b088ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pop Candy Game Documentation</h1>
+        <p>Comprehensive guide for customizing the Pop Candy HTML5 game</p>
+    </header>
+    
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#file-structure">2. Game File Structure</a></li>
+            <li><a href="#game-mechanics">3. Game Mechanics</a></li>
+            <li><a href="#customization">4. Customization Guide</a>
+                <ul>
+                    <li><a href="#visual-customization">4.1 Visual Customization</a></li>
+                    <li><a href="#gameplay-customization">4.2 Gameplay Customization</a></li>
+                    <li><a href="#audio-customization">4.3 Audio Customization</a></li>
+                </ul>
+            </li>
+            <li><a href="#advanced">5. Advanced Customization</a></li>
+            <li><a href="#performance">6. Performance Optimization</a></li>
+            <li><a href="#mobile">7. Mobile Optimization</a></li>
+            <li><a href="#browser-compatibility">8. Browser Compatibility</a></li>
+            <li><a href="#troubleshooting">9. Troubleshooting</a></li>
+            <li><a href="#faqs">10. Frequently Asked Questions</a></li>
+        </ul>
+    </div>
+    
+    <section id="introduction">
+        <h2>1. Introduction</h2>
+        <p>Welcome to the Pop Candy game documentation! This document provides a comprehensive guide to understanding and customizing the Pop Candy game. Whether you want to change the game's appearance, adjust gameplay mechanics, or modify sounds, this guide has you covered.</p>
+        
+        <p>Pop Candy is a match-3 style HTML5 game where players match candies on a game board to score points. The game features colorful candy graphics, a timer system, and engaging sound effects to create an addictive gaming experience.</p>
+        
+        <div class="important">
+            <p><strong>Note:</strong> No programming knowledge is required for basic customization. For more advanced changes, a basic understanding of HTML, CSS, and JavaScript may be helpful, but this guide will walk you through step by step.</p>
+        </div>
+    </section>
+    
+    <section id="file-structure">
+        <h2>2. Game File Structure</h2>
+        <p>Understanding the file structure is essential before customizing the game. Here's the layout of important files and folders:</p>
+        
+        <pre>
+pop-candy/
+├── index.html             # Main HTML file for the game
+├── docs.html              # This documentation file
+├── LICENSE.txt            # License information
+├── README.md              # Basic setup instructions
+├── css/
+│   └── styles.css         # All game styling and visual elements
+├── js/
+│   ├── game.js            # Main game logic
+│   ├── audio.js           # Audio management
+│   └── disable.js         # Browser security features
+└── assets/
+    ├── star.png           # Candy images
+    ├── heart.png
+    ├── circle.png
+    ├── cube.png
+    ├── diamond.png
+    ├── bubble.png
+    ├── aqua.png
+    ├── rainbow.png
+    ├── candy.png
+    └── audio/
+        ├── swap.mp3       # Sound effects
+        ├── match.mp3
+        ├── invalid.mp3
+        ├── game-over.mp3
+        ├── hint.mp3
+        └── background-music.mp3
+</pre>
+        
+        <h3>Key Files Explained</h3>
+        <ul>
+            <li><strong>index.html</strong> - The main file that loads the game and contains the basic structure.</li>
+            <li><strong>css/styles.css</strong> - Contains all visual styling including colors, animations, and layouts.</li>
+            <li><strong>js/game.js</strong> - The core game logic including board generation, game mechanics, scoring, and timer.</li>
+            <li><strong>js/audio.js</strong> - Manages all game sounds and music playback.</li>
+            <li><strong>assets/</strong> - Contains all images and audio files used in the game.</li>
+        </ul>
+    </section>
+    
+    <section id="game-mechanics">
+        <h2>3. Game Mechanics</h2>
+        <p>Before customizing, it's important to understand the core game mechanics:</p>
+        
+        <h3>Game Board</h3>
+        <p>The game uses an 8×8 grid of candies. Each position on the grid contains a candy of a specific type (star, heart, circle, etc.).</p>
+        
+        <h3>Matching Mechanism</h3>
+        <p>Players can swap adjacent candies to create matches of 3 or more identical candies in a row or column. When a match is made:</p>
+        <ul>
+            <li>The matched candies are removed from the board</li>
+            <li>New candies fall from the top to fill empty spaces</li>
+            <li>Points are awarded based on the number of candies matched</li>
+            <li>Time is added to the timer (by default, 2 seconds per candy matched)</li>
+        </ul>
+        
+        <h3>Timer System</h3>
+        <p>The game includes a timer that constantly ticks down. Initially set to 60 seconds, the timer decreases at a rate of 0.4 seconds per real second. Matches add time back to the timer. When the timer reaches zero, the game ends.</p>
+        
+        <h3>Hint System</h3>
+        <p>If a player is inactive for 5 seconds, the game highlights a possible match with animation. If no valid moves exist, the board is automatically shuffled.</p>
+        
+        <h3>Score System</h3>
+        <p>Players earn points for making matches. The game tracks both the current score and the best score (stored in the browser's local storage).</p>
+        
+        <h3>Game States</h3>
+        <p>The game has several states:</p>
+        <ul>
+            <li><strong>Welcome Screen</strong> - Initial screen with the game title and play button</li>
+            <li><strong>Playing</strong> - Active gameplay</li>
+            <li><strong>Paused</strong> - Game is temporarily paused</li>
+            <li><strong>Game Over</strong> - Timer has run out, showing final score</li>
+        </ul>
+    </section>
+    
+    <section id="customization">
+        <h2>4. Customization Guide</h2>
+        <p>Now that you understand the game structure and mechanics, let's explore how to customize various aspects of the game.</p>
+        
+        <section id="visual-customization">
+            <h3>4.1 Visual Customization</h3>
+            
+            <h4>Changing Game Colors</h4>
+            <p>The game uses CSS variables for easy color customization. Open <span class="file-path">css/styles.css</span> and find the <code>:root</code> section at the top:</p>
+            
+            <pre>
+:root {
+    --primary: #ff7eb3;
+    --primary-dark: #e7649a;
+    --secondary: #b088ff;
+    --text-color: #333333;
+    --board-bg: rgba(255, 255, 255, 0.7);
+    --board-border: #ffb8de;
+    --cell-size: clamp(35px, 9vw, 55px);
+}
+</pre>
+            
+            <p>To change colors, simply modify these hex color codes. For example, to change the primary color from pink to blue, you would change <code>#ff7eb3</code> to <code>#7eb3ff</code>.</p>
+            
+            <h4>Changing Game Background</h4>
+            <p>To replace the game background:</p>
+            <ol>
+                <li>Add your new background image to the <span class="file-path">assets/</span> folder</li>
+                <li>Modify the background style in <span class="file-path">css/styles.css</span>. Find the <code>body</code> selector and update it:</li>
+            </ol>
+            
+            <pre>
+body {
+    background-image: url('../assets/your-background.png');
+    background-size: cover;
+    background-position: center;
+    /* Adjust these properties as needed */
+}
+</pre>
+            
+            <h4>Changing Candy Images</h4>
+            <p>To replace the candy images:</p>
+            <ol>
+                <li>Create new images with the same names as the originals (star.png, heart.png, etc.)</li>
+                <li>Make sure your images are square and preferably 128×128 pixels or similar ratio</li>
+                <li>Save them as PNG files with transparency for best results</li>
+                <li>Replace the original files in the <span class="file-path">assets/</span> folder</li>
+            </ol>
+            
+            <p>If you want to use different filenames or add more candy types, you'll need to modify the <code>candyTypes</code> array in <span class="file-path">js/game.js</span>:</p>
+            
+            <pre>
+this.candyTypes = [
+    { type: 'star', image: 'assets/star.png', class: 'star' },
+    { type: 'heart', image: 'assets/heart.png', class: 'heart' },
+    { type: 'circle', image: 'assets/circle.png', class: 'circle' },
+    { type: 'cube', image: 'assets/cube.png', class: 'cube' },
+    { type: 'diamond', image: 'assets/diamond.png', class: 'diamond' },
+    { type: 'bubble', image: 'assets/bubble.png', class: 'bubble' },
+    { type: 'aqua', image: 'assets/aqua.png', class: 'aqua' },
+    { type: 'rainbow', image: 'assets/rainbow.png', class: 'rainbow' },
+    { type: 'candy', image: 'assets/candy.png', class: 'candy-special' }
+];
+</pre>
+            
+            <h4>Changing Font Styles</h4>
+            <p>The game uses the "Fredoka One" Google Font by default. To change it:</p>
+            <ol>
+                <li>Open <span class="file-path">index.html</span></li>
+                <li>Find the Google Fonts link: <code>&lt;link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet"&gt;</code></li>
+                <li>Replace it with your preferred Google Font</li>
+                <li>Update the font-family in <span class="file-path">css/styles.css</span> (search for "font-family")</li>
+            </ol>
+            
+            <h4>Changing Game Title Animation</h4>
+            <p>The bouncing animation of the title letters is defined in the CSS. To modify it, locate the <code>.game-title span</code> section in <span class="file-path">css/styles.css</span>.</p>
+        </section>
+        
+        <section id="gameplay-customization">
+            <h3>4.2 Gameplay Customization</h3>
+            
+            <h4>Changing Game Difficulty</h4>
+            <p>Several parameters in <span class="file-path">js/game.js</span> control the game difficulty:</p>
+            
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Default Value</th>
+                    <th>Effect</th>
+                </tr>
+                <tr>
+                    <td><code>this.maxTime</code></td>
+                    <td>60</td>
+                    <td>Starting time in seconds</td>
+                </tr>
+                <tr>
+                    <td><code>this.timeDecreaseRate</code></td>
+                    <td>0.4</td>
+                    <td>How quickly time decreases (higher = faster/harder)</td>
+                </tr>
+                <tr>
+                    <td><code>this.timeIncreasePerMatch</code></td>
+                    <td>2</td>
+                    <td>Seconds added per candy matched</td>
+                </tr>
+                <tr>
+                    <td><code>this.hintDelay</code></td>
+                    <td>5000</td>
+                    <td>Milliseconds of inactivity before showing a hint</td>
+                </tr>
+                <tr>
+                    <td><code>this.boardSize</code></td>
+                    <td>8</td>
+                    <td>Size of the game board (8×8)</td>
+                </tr>
+            </table>
+            
+            <p>To make the game easier, you could:</p>
+            <ul>
+                <li>Increase <code>this.maxTime</code> (e.g., to 90 for more starting time)</li>
+                <li>Decrease <code>this.timeDecreaseRate</code> (e.g., to 0.3 for slower time decrease)</li>
+                <li>Increase <code>this.timeIncreasePerMatch</code> (e.g., to 3 for more time reward)</li>
+            </ul>
+            
+            <p>To make the game harder, do the opposite.</p>
+            
+            <h4>Changing Board Size</h4>
+            <p>To change the board size:</p>
+            <ol>
+                <li>In <span class="file-path">js/game.js</span>, change <code>this.boardSize = 8;</code> to your desired size</li>
+                <li>In <span class="file-path">css/styles.css</span>, update the <code>.game-board</code> CSS to match:
+                <pre>
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(8, var(--cell-size)); /* Change this number */
+    grid-template-rows: repeat(8, var(--cell-size)); /* Change this number */
+    ...
+}</pre>
+                </li>
+            </ol>
+            
+            <div class="important">
+                <p><strong>Warning:</strong> Changing the board size may require additional adjustments to maintain game balance and screen layout.</p>
+            </div>
+            
+            <h4>Modifying Score System</h4>
+            <p>The scoring logic is in the <code>checkAndRemoveMatches</code> function in <span class="file-path">js/game.js</span>. By default, players earn 10 points per matched candy. To change this, find and modify:</p>
+            
+            <pre>
+// Calculate score (10 points per candy)
+const matchScore = matches.length * 10;
+this.score += matchScore;</pre>
+        </section>
+        
+        <section id="audio-customization">
+            <h3>4.3 Audio Customization</h3>
+            
+            <h4>Replacing Sound Effects</h4>
+            <p>Sound effects are defined in <span class="file-path">js/audio.js</span>:</p>
+            
+            <pre>
+sounds: {
+    swap: new Audio('assets/audio/swap.mp3'),
+    match: new Audio('assets/audio/match.mp3'),
+    invalid: new Audio('assets/audio/invalid.mp3'),
+    gameOver: new Audio('assets/audio/game-over.mp3'),
+    hint: new Audio('assets/audio/hint.mp3')
+},</pre>
+            
+            <p>To replace a sound effect:</p>
+            <ol>
+                <li>Create or find a new sound file (MP3 format recommended)</li>
+                <li>Name it the same as the original (e.g., swap.mp3)</li>
+                <li>Replace the file in <span class="file-path">assets/audio/</span></li>
+            </ol>
+            
+            <p>Or, to use a different filename:</p>
+            <ol>
+                <li>Add your new sound file to <span class="file-path">assets/audio/</span></li>
+                <li>Update the corresponding line in <span class="file-path">js/audio.js</span></li>
+            </ol>
+            
+            <h4>Changing Background Music</h4>
+            <p>To replace the background music:</p>
+            <ol>
+                <li>Create or find a new music file (MP3 format recommended)</li>
+                <li>Name it "background-music.mp3" and replace the existing file in <span class="file-path">assets/audio/</span></li>
+            </ol>
+            
+            <p>Or, to use a different filename, modify the <code>initMusic</code> function in <span class="file-path">js/audio.js</span>:</p>
+            
+            <pre>
+initMusic() {
+    try {
+        this.music = new Audio('assets/audio/your-new-music-file.mp3');
+        this.music.loop = true;
+        this.music.volume = 0.3; // You can also adjust volume here
+        ...
+    }
+    ...
+}</pre>
+            
+            <h4>Adjusting Volume Levels</h4>
+            <p>To adjust the volume of sound effects, modify the <code>playSound</code> function in <span class="file-path">js/audio.js</span>:</p>
+            
+            <pre>
+playSound(sound) {
+    ...
+    const soundEffect = new Audio(this.sounds[sound].src);
+    soundEffect.volume = 0.5; // Change this value (0.0 to 1.0)
+    ...
+}</pre>
+            
+            <p>To adjust background music volume, modify the <code>initMusic</code> function:</p>
+            
+            <pre>
+initMusic() {
+    ...
+    this.music.volume = 0.3; // Change this value (0.0 to 1.0)
+    ...
+}</pre>
+        </section>
+    </section>
+    
+    <section id="advanced">
+        <h2>5. Advanced Customization</h2>
+        
+        <h3>Adding New Candy Types</h3>
+        <p>To add a new candy type:</p>
+        <ol>
+            <li>Create a new candy image and add it to <span class="file-path">assets/</span></li>
+            <li>Add a new entry to the <code>candyTypes</code> array in <span class="file-path">js/game.js</span>:
+            <pre>
+{ type: 'newCandy', image: 'assets/newCandy.png', class: 'new-candy' }</pre>
+            </li>
+            <li>Add CSS for the new candy class in <span class="file-path">css/styles.css</span></li>
+        </ol>
+        
+        <h3>Adding Special Candies</h3>
+        <p>The game includes a framework for special candies. You can extend this by:</p>
+        <ol>
+            <li>Adding a special candy type to the <code>candyTypes</code> array</li>
+            <li>Modifying the <code>checkAndRemoveMatches</code> function to create special candies when certain match patterns occur</li>
+            <li>Adding special effects when these candies are matched</li>
+        </ol>
+        
+        <h3>Creating Custom Levels</h3>
+        <p>For implementing custom level designs:</p>
+        <ol>
+            <li>Modify the <code>createBoard</code> and <code>fillBoard</code> functions to use predefined layouts</li>
+            <li>Consider creating a levels array with different configurations</li>
+            <li>Add level progression logic to the game</li>
+        </ol>
+        
+        <h3>Adding Animations</h3>
+        <p>To add new animations:</p>
+        <ol>
+            <li>Define the animation in <span class="file-path">css/styles.css</span> using keyframes</li>
+            <li>Apply the animation to elements by adding classes at appropriate times in the JavaScript</li>
+        </ol>
+    </section>
+    
+    <section id="performance">
+        <h2>6. Performance Optimization</h2>
+        
+        <h3>Canvas Rendering</h3>
+        <p>For better performance, especially on mobile devices, you can convert the game board to use Canvas instead of DOM elements. This requires more advanced JavaScript modifications:</p>
+        
+        <ol>
+            <li>Create a <code>createCanvasBoard</code> method in <span class="file-path">js/game.js</span>:</li>
+        </ol>
+        
+        <pre>
+createCanvasBoard() {
+    // Create canvas element
+    const canvas = document.createElement('canvas');
+    canvas.width = this.boardSize * 60; // Adjust size as needed
+    canvas.height = this.boardSize * 60;
+    canvas.id = 'gameCanvas';
+    
+    // Replace board with canvas
+    this.gameBoard.parentNode.replaceChild(canvas, this.gameBoard);
+    this.gameBoard = canvas;
+    this.ctx = canvas.getContext('2d');
+    
+    // Load candy images
+    this.candyImages = {};
+    const imageLoadPromises = this.candyTypes.map(candy => {
+        return new Promise(resolve => {
+            const img = new Image();
+            img.onload = () => resolve();
+            img.src = candy.image;
+            this.candyImages[candy.type] = img;
+        });
+    });
+    
+    // Continue initialization after images load
+    Promise.all(imageLoadPromises).then(() => {
+        this.fillCanvasBoard();
+        this.setupCanvasEvents();
+    });
+}</pre>
+        
+        <ol start="2">
+            <li>Add a method to render the board:</li>
+        </ol>
+        
+        <pre>
+renderCanvasBoard() {
+    // Clear canvas
+    this.ctx.clearRect(0, 0, this.gameBoard.width, this.gameBoard.height);
+    
+    // Draw each candy
+    const tileSize = this.gameBoard.width / this.boardSize;
+    
+    for (let i = 0; i < this.boardSize; i++) {
+        for (let j = 0; j < this.boardSize; j++) {
+            const candy = this.board[i][j];
+            if (candy.type) {
+                const img = this.candyImages[candy.type];
+                
+                // Draw candy image
+                this.ctx.drawImage(
+                    img, 
+                    j * tileSize, 
+                    i * tileSize,
+                    tileSize,
+                    tileSize
+                );
+                
+                // Draw selection/animation state if needed
+                if (candy.isSelected) {
+                    this.ctx.strokeStyle = '#FFFFFF';
+                    this.ctx.lineWidth = 3;
+                    this.ctx.strokeRect(
+                        j * tileSize + 3,
+                        i * tileSize + 3,
+                        tileSize - 6,
+                        tileSize - 6
+                    );
+                }
+            }
+        }
+    }
+}</pre>
+        
+        <p>Then you would need to modify the game's event handlers and update loop to work with canvas instead of DOM elements. This is an advanced modification that requires good JavaScript knowledge.</p>
+        
+        <h3>Asset Preloading</h3>
+        <p>Improve load times by preloading assets. Add this method to the <code>CandyGame</code> class in <span class="file-path">js/game.js</span>:</p>
+        
+        <pre>
+preloadAssets() {
+    return new Promise(resolve => {
+        const assets = [];
+        
+        // Add all candy images
+        this.candyTypes.forEach(candy => {
+            assets.push(candy.image);
+        });
+        
+        // Add audio files
+        const audioFiles = [
+            'assets/audio/background-music.mp3',
+            'assets/audio/match.mp3',
+            'assets/audio/swap.mp3',
+            'assets/audio/invalid.mp3',
+            'assets/audio/game-over.mp3',
+            'assets/audio/hint.mp3'
+        ];
+        
+        assets.push(...audioFiles);
+        
+        // Track loading progress
+        let loaded = 0;
+        
+        assets.forEach(asset => {
+            if (asset.endsWith('.mp3') || 
+                asset.endsWith('.wav') || 
+                asset.endsWith('.ogg')) {
+                // Preload audio
+                const audio = new Audio();
+                audio.addEventListener('canplaythrough', () => {
+                    loaded++;
+                    if (loaded === assets.length) resolve();
+                }, { once: true });
+                audio.src = asset;
+            } else {
+                // Preload image
+                const img = new Image();
+                img.addEventListener('load', () => {
+                    loaded++;
+                    if (loaded === assets.length) resolve();
+                }, { once: true });
+                img.src = asset;
+            }
+        });
+    });
+}</pre>
+        
+        <p>Call this method during game initialization and show a loading screen until assets are loaded.</p>
+        
+        <h3>Reducing Animations</h3>
+        <p>If the game runs slowly, especially on mobile devices, you can simplify animations by modifying the CSS in <span class="file-path">css/styles.css</span>. Look for animation-related classes and reduce their complexity.</p>
+    </section>
+    
+    <section id="mobile">
+        <h2>7. Mobile Optimization</h2>
+        
+        <h3>Touch Controls</h3>
+        <p>The game already includes touch controls, but you can enhance the touch experience by adding visual feedback. Add this CSS to <span class="file-path">css/styles.css</span>:</p>
+        
+        <pre>
+.candy.touch-feedback {
+    transform: scale(1.1);
+    opacity: 0.8;
+    z-index: 10;
+}</pre>
+        
+        <p>Then modify the event listeners in <span class="file-path">js/game.js</span> to add and remove this class during touch interactions:</p>
+        
+        <pre>
+this.gameBoard.addEventListener('touchstart', (e) => {
+    if (!this.gameActive || this.isPaused) return;
+    
+    const candy = e.target.closest('.candy');
+    if (candy) {
+        candy.classList.add('touch-feedback');
+        // Rest of your touch handling code
+    }
+});
+
+this.gameBoard.addEventListener('touchend', () => {
+    if (!this.gameActive || this.isPaused) return;
+    
+    // Remove touch feedback from all candies
+    document.querySelectorAll('.candy.touch-feedback').forEach(candy => {
+        candy.classList.remove('touch-feedback');
+    });
+    
+    // Rest of your touch end handling code
+});</pre>
+        
+        <h3>Responsive Layout</h3>
+        <p>Improve the game's responsive behavior by adding these media queries to <span class="file-path">css/styles.css</span>:</p>
+        
+        <pre>
+/* For tablets */
+@media (max-width: 768px) {
+    .game-container {
+        width: 95vw;
+    }
+    
+    .game-board {
+        width: 95vw;
+        height: 95vw;
+    }
+    
+    :root {
+        --cell-size: calc(95vw / 8);
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+    
+    .score-container {
+        font-size: 0.9rem;
+    }
+    
+    .control-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Landscape mode optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+    .game-container {
+        flex-direction: row;
+    }
+    
+    .controls {
+        flex-direction: column;
+        margin-right: 1rem;
+    }
+    
+    .game-board {
+        width: 80vh;
+        height: 80vh;
+    }
+    
+    :root {
+        --cell-size: calc(80vh / 8);
+    }
+}</pre>
+    </section>
+    
+    <section id="browser-compatibility">
+        <h2>8. Browser Compatibility</h2>
+        
+        <h3>Adding Polyfills</h3>
+        <p>For older browsers, you can add polyfills to ensure compatibility. Create a new file called <span class="file-path">js/polyfills.js</span> with the following content:</p>
+        
+        <pre>
+// Polyfills for older browsers
+if (!Array.from) {
+    Array.from = function(iterable) {
+        return [].slice.call(iterable);
+    };
+}
+
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function(selector) {
+        let el = this;
+        while (el) {
+            if (el.matches(selector)) {
+                return el;
+            }
+            el = el.parentElement;
+        }
+        return null;
+    };
+}
+
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector || 
+                               Element.prototype.webkitMatchesSelector;
+}</pre>
+        
+        <p>Then include this file in <span class="file-path">index.html</span> before your other scripts:</p>
+        
+        <pre>
+&lt;script src="js/polyfills.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="js/game.js"&gt;&lt;/script&gt;</pre>
+        
+        <h3>Vendor Prefixes</h3>
+        <p>Ensure your CSS animations work in all browsers by adding vendor prefixes. For example:</p>
+        
+        <pre>
+.candy.matched {
+    animation: match-animation 0.6s ease-out;
+    -webkit-animation: match-animation 0.6s ease-out;
+}
+
+@keyframes match-animation {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+@-webkit-keyframes match-animation {
+    0% { -webkit-transform: scale(1); opacity: 1; }
+    50% { -webkit-transform: scale(1.3); opacity: 0.8; }
+    100% { -webkit-transform: scale(0); opacity: 0; }
+}</pre>
+    </section>
+    
+    <section id="troubleshooting">
+        <h2>9. Troubleshooting</h2>
+        
+        <h3>Game Won't Start</h3>
+        <ul>
+            <li><strong>Problem:</strong> Clicking the play button doesn't start the game.</li>
+            <li><strong>Solution:</strong> Check the browser console for errors. This might indicate missing files or JavaScript errors.</li>
+        </ul>
+        
+        <h3>No Sound Playing</h3>
+        <ul>
+            <li><strong>Problem:</strong> Game sounds or music aren't playing.</li>
+            <li><strong>Solution:</strong>
+                <ul>
+                    <li>Verify sound is enabled in the game (check the sound button)</li>
+                    <li>Check that audio files exist in the correct location</li>
+                    <li>Some browsers require user interaction before playing audio - click somewhere on the page first</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Game Performance Issues</h3>
+        <ul>
+            <li><strong>Problem:</strong> Game runs slowly or animations stutter.</li>
+            <li><strong>Solution:</strong>
+                <ul>
+                    <li>Reduce the size/complexity of candy images</li>
+                    <li>Simplify CSS animations</li>
+                    <li>Consider reducing the board size for slower devices</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Candies Don't Match Properly</h3>
+        <ul>
+            <li><strong>Problem:</strong> Matching candies doesn't remove them or add score.</li>
+            <li><strong>Solution:</strong> Check for JavaScript errors in the console. If you've modified the matching logic, verify that your changes are consistent with the game mechanics.</li>
+        </ul>
+        
+        <h3>Custom Images Don't Appear</h3>
+        <ul>
+            <li><strong>Problem:</strong> After replacing candy images, they don't show up.</li>
+            <li><strong>Solution:</strong>
+                <ul>
+                    <li>Verify file paths and names are correct</li>
+                    <li>Check image formats (PNG recommended)</li>
+                    <li>Clear browser cache (Ctrl+F5 or Cmd+Shift+R)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Audio Not Playing in Mobile Browsers</h3>
+        <ul>
+            <li><strong>Problem:</strong> Audio doesn't play on mobile devices, particularly on iOS.</li>
+            <li><strong>Solution:</strong> Mobile browsers require user interaction before playing audio. Add this code to <span class="file-path">js/audio.js</span>:
+            <pre>
+initAudio() {
+    // Flag to track if audio has been initialized
+    this.audioInitialized = false;
+    
+    // Add a one-time listener for user interaction
+    const unlockAudio = () => {
+        if (!this.audioInitialized) {
+            // Create and play a silent sound
+            const audio = new Audio();
+            audio.play().catch(() => {});
+            
+            this.audioInitialized = true;
+            
+            // Now initialize the real audio
+            if (this.isMusicEnabled) {
+                this.playMusic();
+            }
+        }
+        
+        // Remove event listeners
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('touchstart', unlockAudio);
+    };
+    
+    document.addEventListener('click', unlockAudio);
+    document.addEventListener('touchstart', unlockAudio);
+}</pre>
+            </li>
+        </ul>
+    </section>
+    
+    <section id="faqs">
+        <h2>10. Frequently Asked Questions</h2>
+        
+        <h3>Can I add more levels to the game?</h3>
+        <p>Yes, but this requires more extensive JavaScript modifications. You would need to create a level system with different board configurations and progression logic.</p>
+        
+        <h3>How do I change the game logo?</h3>
+        <p>The game title is text-based, styled with CSS. To replace it with a logo image, you would modify the "welcome-screen" section in index.html and update the corresponding CSS.</p>
+        
+        <h3>Can I make the board smaller for mobile devices?</h3>
+        <p>The game already uses responsive design with <code>clamp()</code> for cell sizes. You can adjust this in the CSS variables if needed.</p>
+        
+        <h3>How do I add custom candy behaviors?</h3>
+        <p>This requires modifying the game logic in <span class="file-path">js/game.js</span>. Look at the <code>checkAndRemoveMatches</code> function to understand how matches are processed, then add custom behaviors there.</p>
+        
+        <h3>Can I change the pause overlay design?</h3>
+        <p>Yes, the pause overlay is created dynamically in the <code>togglePause</code> function. Modify this function to change its appearance or add custom elements.</p>
+        
+        <h3>How can I add a leaderboard?</h3>
+        <p>You would need to implement a server-side component to store scores across users. For a local-only leaderboard, you could extend the localStorage usage to keep track of multiple scores.</p>
+        
+        <h3>Can I customize the game over screen?</h3>
+        <p>Yes, modify the HTML in the "game-over" div in <span class="file-path">index.html</span> and the corresponding CSS in <span class="file-path">css/styles.css</span>.</p>
+        
+        <h3>How do I add more sound effects?</h3>
+        <p>Add your sound file to <span class="file-path">assets/audio/</span>, then add it to the <code>sounds</code> object in <span class="file-path">js/audio.js</span>, and finally call <code>audioManager.playSound('yourSoundName')</code> where needed.</p>
+        
+        <h3>How do I implement a level system?</h3>
+        <p>To add a level progression system, you'll need to:</p>
+        <ol>
+            <li>Define level data in an array with settings for each level</li>
+            <li>Add methods to load different levels based on player progress</li>
+            <li>Create a level completion screen</li>
+            <li>Modify the game to check for level completion</li>
+        </ol>
+        <p>This requires more extensive JavaScript modifications. Look at the <code>loadLevel</code>, <code>checkLevelCompletion</code>, and <code>levelComplete</code> methods in the Advanced Customization section above.</p>
+        
+        <h3>How do I add power-ups to the game?</h3>
+        <p>Adding power-ups requires extending the game logic to:</p>
+        <ol>
+            <li>Define power-up types and their effects</li>
+            <li>Create conditions for generating power-ups (like matching 4+ candies)</li>
+            <li>Add visual indicators for power-ups</li>
+            <li>Implement the power-up activation logic</li>
+        </ol>
+        <p>See the Advanced Customization section for sample code to implement power-ups.</p>
+        
+        <h3>How can I create different game modes?</h3>
+        <p>To add different game modes (like timed, moves-limited, or endless):</p>
+        <ol>
+            <li>Create a mode selection interface</li>
+            <li>Add a <code>gameMode</code> property to the game class</li>
+            <li>Implement a <code>setGameMode</code> method to configure the game based on the selected mode</li>
+            <li>Modify game logic to handle the different win/loss conditions for each mode</li>
+        </ol>
+        
+        <h3>How do I customize the scoring system?</h3>
+        <p>To create custom scoring rules:</p>
+        <ol>
+            <li>Modify the <code>checkAndRemoveMatches</code> method in <span class="file-path">js/game.js</span></li>
+            <li>Add bonuses for larger matches or combos</li>
+            <li>Consider implementing a score multiplier system</li>
+        </ol>
+        <p>For example, you can award more points for matches larger than 3, or add combo bonuses for consecutive matches.</p>
+    </section>
+    
+    <button id="top-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">↑</button>
+    
+    <script>
+        // Show/hide "back to top" button based on scroll position
+        window.onscroll = function() {
+            var topButton = document.getElementById("top-button");
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                topButton.style.display = "flex";
+            } else {
+                topButton.style.display = "none";
+            }
+        };
+        
+        // Initially hide the button
+        document.getElementById("top-button").style.display = "none";
+    </script>
+</body>
+</html>

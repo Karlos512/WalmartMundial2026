@@ -17,6 +17,7 @@ class Perfil extends Component
     public $mensaje = "";
     public $nickname, $mejorPuntaje;
     public $intentos=0;
+    public $jugando = false;
 
     public function mount()
     {
@@ -99,5 +100,12 @@ class Perfil extends Component
         //     'mejorTiempo' => $mejorTiempo
         // ]);
         return view('livewire.user.perfil');
+    }
+
+    public function iniciarIntento()
+    {
+
+        $this->jugando = true;
+        $this->dispatch('iniciar-juego');
     }
 }

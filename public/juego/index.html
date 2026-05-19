@@ -1,0 +1,100 @@
+<!--
+  © 2025 Techxedo. All rights reserved.
+  Unauthorized copying, redistribution, or modification is prohibited.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pop Candy - Most Addictive HTML5 Game</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="./assets/favicon.png" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Welcome Screen -->
+    <div id="welcomeScreen" class="welcome-screen">
+      <!-- <h1 class="game-title">
+        <span>P</span>
+        <span>O</span>
+        <span>P</span>
+        <span> </span>
+        <span>C</span>
+        <span>A</span>
+        <span>N</span>
+        <span>D</span>
+        <span>Y</span>
+      </h1> -->
+      <button id="startBtn" class="play-button">PLAY</button>
+
+      <div class="audio-controls">
+        <button id="musicToggleBtn" class="audio-btn">
+          <i class="fa-music"></i>
+          <span class="audio-status"></span>
+        </button>
+        <button id="soundToggleBtn" class="audio-btn">
+          <i class="fa-volume"></i>
+          <span class="audio-status"></span>
+        </button>
+      </div>
+
+      <!-- Decorative candy elements -->
+      <div class="candy-decoration candy-1"></div>
+      <div class="candy-decoration candy-2"></div>
+      <div class="candy-decoration candy-3"></div>
+      <div class="candy-decoration candy-4"></div>
+    </div>
+
+    <!-- Game Container (initially hidden) -->
+    <div class="game-container" id="gameContainer">
+      <div class="header">
+        <div class="score-container">
+          <div class="best-display" style="display: none">
+            TIEMPO: <span id="bestScore">0</span>
+          </div>
+          <div class="best-display">TIEMPO: <span id="timer"></span></div>
+          <div class="score-display">
+            PUNTAJE: <span id="currentScore">0</span>
+          </div>
+        </div>
+        <!-- <div class="controls">
+          <button id="pauseBtn" class="control-btn pause-btn">
+            <span></span>
+          </button>
+        </div> -->
+      </div>
+
+      <div class="board-container">
+        <div id="board" class="game-board"></div>
+
+        <!-- Timer Bar -->
+        <div class="timer-container">
+          <div id="timerBar" class="timer-bar"></div>
+        </div>
+      </div>
+
+      <div id="gameOver" class="game-over hidden">
+        <div class="game-over-content">
+          <!-- Decorative candy images -->
+          <img src="./assets/star.png" class="game-over-candy" />
+          <img src="./assets/heart.png" class="game-over-candy" />
+          <img src="./assets/circle.png" class="game-over-candy" />
+          <img src="./assets/bubble.png" class="game-over-candy" />
+
+          <h2>SE ACABO EL TIEMPO!</h2>
+          <p>PUNTAJE: <span id="finalScore">0</span></p>
+          <!-- <p>Best Score: <span id="highScore">0</span></p>
+          <button id="restartBtn" class="restart-btn">PLAY AGAIN</button> -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/game.js"></script>
+    <script src="js/disable.js"></script>
+  </body>
+</html>
