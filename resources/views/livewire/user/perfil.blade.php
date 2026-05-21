@@ -177,33 +177,66 @@
 
         async function iniciarJuego() {
 
+            // 🔥 destruir juego anterior
             if (window.gameInstance) {
-                return;
+
+                try {
+
+                    window.gameInstance.destroy();
+
+                } catch (e) {
+
+                    console.error('Error destruyendo juego:', e);
+
+                }
+
+                window.gameInstance = null;
             }
 
             const iniciarInstancia = () => {
 
                 try {
 
+                    document.getElementById('gameOver')
+                        ?.classList.add('hidden');
+
+                    document.getElementById('welcomeScreen')
+                        ?.classList.remove('hidden');
+
+                    document.getElementById('currentScore').innerText = '0';
+                    document.getElementById('finalScore').innerText = '0';
+                    document.getElementById('timer').innerText = '60';
+
+                    const board = document.getElementById('board');
+
+                    if (board) {
+                        board.innerHTML = '';
+                    }
+
                     window.gameInstance = new window.CandyGame();
 
-                    window.gameInstance.startBtn?.click();
+                    setTimeout(() => {
+
+                        window.gameInstance.startBtn?.click();
+
+                    }, 100);
 
                 } catch (e) {
 
-                    console.error(e);
+                    console.error('Error iniciando juego:', e);
 
                 }
 
             };
 
+            // script ya cargado
             if (window.CandyGame) {
 
                 iniciarInstancia();
                 return;
-
             }
 
+            // evitar duplicar script
             if (document.getElementById('game-script')) {
                 return;
             }
@@ -218,7 +251,9 @@
 
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
+
                         iniciarInstancia();
+
                     });
                 });
 

@@ -1045,13 +1045,48 @@ class CandyGame {
   destroy() {
 
       this.gameActive = false;
+
       clearInterval(this.timerInterval);
       clearInterval(this.hintCheckInterval);
 
       this.clearHint();
 
       audioManager.pauseMusic();
-    }
+
+      const board = document.getElementById('board');
+
+      if (board) {
+          board.innerHTML = '';
+      }
+
+      // ocultar game over
+      document.getElementById('gameOver')
+          ?.classList.add('hidden');
+
+      // mostramod pantalla inicial
+      document.getElementById('welcomeScreen')
+          ?.classList.remove('hidden');
+
+      // reset score/timer
+      const score = document.getElementById('currentScore');
+      const final = document.getElementById('finalScore');
+      const timer = document.getElementById('timer');
+
+      if (score) score.innerText = '0';
+      if (final) final.innerText = '0';
+      if (timer) timer.innerText = '60';
+
+      const timerBar = document.getElementById('timerBar');
+
+      if (timerBar) {
+          timerBar.style.width = '100%';
+      }
+
+      this.board = [];
+      this.selectedCandy = null;
+      this.score = 0;
+      this.timeLeft = 60;
+  }
 
   getSwipeDirection(angle) {
     if (angle < -135 || angle > 135) return "left";
