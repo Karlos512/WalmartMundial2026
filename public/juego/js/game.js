@@ -19,6 +19,8 @@ class CandyGame {
     this.isPaused = false;
     this.gameActive = false; // Game not active until play button clicked
 
+    this.scoreSaved = false; //agregamos paa el save score
+
     // Timer settings
     this.maxTime = 60; // 60 seconds starting time
     this.currentTime = this.maxTime;
@@ -972,29 +974,35 @@ class CandyGame {
   }
 
   gameOver() {
-    this.gameActive = false;
-    clearInterval(this.timerInterval);
 
-    // Clear hint interval
-    if (this.hintCheckInterval) {
-      clearInterval(this.hintCheckInterval);
-    }
-    this.clearHint();
+      this.gameActive = false;
 
-    // Update game over screen
-    this.gameOverElement.classList.remove("hidden");
-    this.finalScoreElement.textContent = this.score;
+      clearInterval(this.timerInterval);
 
-    if (this.score > this.bestScore) {
-      this.bestScore = this.score;
-      localStorage.setItem("bestScore", this.bestScore);
-    }
+      if (this.hintCheckInterval) {
+          clearInterval(this.hintCheckInterval);
+      }
 
-    // this.highScoreElement.textContent = this.bestScore;
+      this.clearHint();
 
-    // Play game over sound
-    audioManager.playSound("gameOver");
-    audioManager.pauseMusic();
+      this.gameOverElement.classList.remove("hidden");
+
+      this.finalScoreElement.textContent = this.score;
+
+      if (!this.scoreSaved && window.Livewire) {
+
+          this.scoreSaved = true;
+
+          Livewire.dispatch('guardar-score', {
+              score: this.score
+          });
+
+      }
+
+      audioManager.playSound("gameOver");
+
+      audioManager.pauseMusic();
+
   }
 
   restart() {
@@ -1033,6 +1041,17 @@ class CandyGame {
     this.lastMoveTime = Date.now();
     this.setupHintSystem();
   }
+
+  destroy() {
+
+      this.gameActive = false;
+      clearInterval(this.timerInterval);
+      clearInterval(this.hintCheckInterval);
+
+      this.clearHint();
+
+      audioManager.pauseMusic();
+    }
 
   getSwipeDirection(angle) {
     if (angle < -135 || angle > 135) return "left";
