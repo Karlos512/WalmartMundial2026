@@ -184,7 +184,6 @@
         let juegoActivo = null;
         let tokenPartidaActual = null;
 
-        // 1. ESCUCHADOR PRINCIPAL DE LIVEWIRE (Para arrancar el juego)
         document.addEventListener('livewire:init', () => {
             
             Livewire.on('iniciar-juego', (data) => {
@@ -192,7 +191,7 @@
 
                 // Limpieza visual del DOM para que aparezca el tablero limpio
                 document.getElementById('gameOver')?.classList.add('hidden');
-                document.getElementById('welcomeScreen')?.classList.add('hidden'); // Asegúrate de ocultar la bienvenida
+                document.getElementById('welcomeScreen')?.classList.add('hidden'); 
                 document.getElementById('currentScore').innerText = '0';
                 document.getElementById('finalScore').innerText = '0';
                 document.getElementById('timer').innerText = '60';
@@ -215,7 +214,6 @@
                 }
             });
 
-            // NUEVO: Configuramos el botón de Facebook una sola vez al cargar Livewire
             const btnFB = document.getElementById('btnCompartirFB');
             if (btnFB) {
                 btnFB.onclick = function() {
@@ -236,7 +234,6 @@
             }
         });
 
-        // 2. DESPACHADOR SEGURO (Solo envía el score al backend al terminar)
         window.__DespacharScoreSeguro = function(scoreFinal) {
             if (tokenPartidaActual && window.Livewire) {
                 Livewire.dispatch('guardar-score', { 

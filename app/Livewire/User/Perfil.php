@@ -76,7 +76,7 @@ class Perfil extends Component
             return; 
         }
 
-        //tiempodinamico
+        //tiempodinamico calculado
         $tiempoMaximoPermitido = 95 + ($score * 0.25);
 
         if ($tiempoTranscurrido > $tiempoMaximoPermitido) {
