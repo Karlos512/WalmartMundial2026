@@ -89,7 +89,7 @@
                         </ul>
                     </div>
                 </div>
-                </div>
+            </div>
         </div>
     </section>
 
@@ -102,20 +102,32 @@
                         <tr>
                             <th class="px-6 py-4">Posición</th>
                             <th class="px-6 py-4">Participante</th>
-                            <th class="px-6 py-4">Tiempo</th>
+                            <th class="px-6 py-4">Puntaje</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-bold text-brand italic text-xl">1</td>
-                            <td class="px-6 py-4 font-medium italic">GamerPro_2026</td>
-                            <td class="px-6 py-4 font-mono text-brand">02:45:120</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-bold text-gray-400 italic text-xl">2</td>
-                            <td class="px-6 py-4 font-medium italic">DarkKnight_99</td>
-                            <td class="px-6 py-4 font-mono">03:01:450</td>
-                        </tr>
+                        @forelse($ranking as $index => $intento)
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4 font-black italic text-xl 
+                                    {{ $index + 1 == 1 ? 'text-yellow-500' : ($index + 1 == 2 ? 'text-gray-400' : ($index + 1 == 3 ? 'text-amber-600' : 'text-gray-600')) }}">
+                                    {{ $index + 1 }}
+                                </td>
+                                
+                                <td class="px-6 py-4 font-semibold text-gray-700 italic">
+                                    {{ $intento->user->nickname ?? 'Gamer Anónimo' }}
+                                </td>
+                                
+                                <td class="px-6 py-4 font-mono font-bold text-brand">
+                                    {{ number_format($intento->mejor_puntaje) }} pts
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="px-6 py-8 text-center text-gray-400 italic">
+                                    ¡El reto acaba de iniciar! Sé el primero en registrar tu puntaje.
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

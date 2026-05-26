@@ -21,6 +21,12 @@ class intentos extends Model
     ];
 
 
+    public function user()
+    {
+            //hacep relacion 
+        return $this->belongsTo(User::class, 'user_id', 'id');
+
+    }
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
