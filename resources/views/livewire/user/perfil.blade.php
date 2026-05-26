@@ -141,28 +141,30 @@
                     </div>
 
                     <div id="gameOver" class="game-over hidden">
-
                         <div class="game-over-content text-center">
-
                             <h2 class="text-red-500 font-black italic text-2xl uppercase">
                                 ¡TIEMPO AGOTADO!
                             </h2>
 
                             <p class="text-sm font-bold text-gray-400 mt-2">
-
                                 Puntaje obtenido:
-
-                                <span
-                                    id="finalScore"
-                                    class="text-white font-mono font-black text-xl"
-                                >
+                                <span id="finalScore" class="text-white font-mono font-black text-xl">
                                     0
                                 </span>
-
                             </p>
 
+                            <div class="mt-5">
+                                <button 
+                                    id="btnCompartirFB"
+                                    class="inline-flex items-center justify-center bg-[#1877F2] hover:bg-[#166FE5] text-white font-bold text-sm px-4 py-2.5 rounded-lg transition-colors duration-200 shadow-md"
+                                >
+                                    <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                    Compartir en Facebook
+                                </button>
+                            </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -173,106 +175,82 @@
 
     </div>
 
-    <script>
 
-        async function iniciarJuego() {
 
-            // 🔥 destruir juego anterior
-            if (window.gameInstance) {
+<script src="{{ asset('juego/js/game.js') }}"></script>
 
-                try {
+<script>
+    (() => {
+        let juegoActivo = null;
+        let tokenPartidaActual = null;
 
-                    window.gameInstance.destroy();
+        // 1. ESCUCHADOR PRINCIPAL DE LIVEWIRE (Para arrancar el juego)
+        document.addEventListener('livewire:init', () => {
+            
+            Livewire.on('iniciar-juego', (data) => {
+                tokenPartidaActual = data[0]?.token || data?.token || null;
 
-                } catch (e) {
+                // Limpieza visual del DOM para que aparezca el tablero limpio
+                document.getElementById('gameOver')?.classList.add('hidden');
+                document.getElementById('welcomeScreen')?.classList.add('hidden'); // Asegúrate de ocultar la bienvenida
+                document.getElementById('currentScore').innerText = '0';
+                document.getElementById('finalScore').innerText = '0';
+                document.getElementById('timer').innerText = '60';
+                
+                const board = document.getElementById('board');
+                if (board) board.innerHTML = ''; // Se limpia el contenedor para el nuevo tablero
 
-                    console.error('Error destruyendo juego:', e);
-
-                }
-
-                window.gameInstance = null;
-            }
-
-            const iniciarInstancia = () => {
-
-                try {
-
-                    document.getElementById('gameOver')
-                        ?.classList.add('hidden');
-
-                    document.getElementById('welcomeScreen')
-                        ?.classList.remove('hidden');
-
-                    document.getElementById('currentScore').innerText = '0';
-                    document.getElementById('finalScore').innerText = '0';
-                    document.getElementById('timer').innerText = '60';
-
-                    const board = document.getElementById('board');
-
-                    if (board) {
-                        board.innerHTML = '';
+                if (typeof window.__ArrancarCandyGameNativo === 'function') {
+                    if (juegoActivo) {
+                        try { juegoActivo.destroy(); } catch(e) { console.error(e); }
+                        juegoActivo = null;
                     }
 
-                    window.gameInstance = new window.CandyGame();
+                    // Arrancamos la instancia nativa del juego
+                    juegoActivo = window.__ArrancarCandyGameNativo(tokenPartidaActual);
 
                     setTimeout(() => {
-
-                        window.gameInstance.startBtn?.click();
-
+                        juegoActivo.startBtn?.click();
                     }, 100);
-
-                } catch (e) {
-
-                    console.error('Error iniciando juego:', e);
-
                 }
-
-            };
-
-            // script ya cargado
-            if (window.CandyGame) {
-
-                iniciarInstancia();
-                return;
-            }
-
-            // evitar duplicar script
-            if (document.getElementById('game-script')) {
-                return;
-            }
-
-            const script = document.createElement('script');
-
-            script.id = 'game-script';
-            script.type = 'module';
-            script.src = "{{ asset('juego/js/game.js') }}";
-
-            script.onload = () => {
-
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-
-                        iniciarInstancia();
-
-                    });
-                });
-
-            };
-
-            document.body.appendChild(script);
-
-        }
-
-        document.addEventListener('livewire:init', () => {
-
-            Livewire.on('iniciar-juego', () => {
-
-                iniciarJuego();
-
             });
 
+            // NUEVO: Configuramos el botón de Facebook una sola vez al cargar Livewire
+            const btnFB = document.getElementById('btnCompartirFB');
+            if (btnFB) {
+                btnFB.onclick = function() {
+                    const urlCompartir = encodeURIComponent(window.location.href);
+                    const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${urlCompartir}`;
+                    
+                    const width = 600;
+                    const height = 400;
+                    const left = (window.screen.width / 2) - (width / 2);
+                    const top = (window.screen.height / 2) - (height / 2);
+                    
+                    window.open(
+                        fbShareUrl, 
+                        'Compartir Récord', 
+                        `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+                    );
+                };
+            }
         });
 
-    </script>
+        // 2. DESPACHADOR SEGURO (Solo envía el score al backend al terminar)
+        window.__DespacharScoreSeguro = function(scoreFinal) {
+            if (tokenPartidaActual && window.Livewire) {
+                Livewire.dispatch('guardar-score', { 
+                    score: parseInt(scoreFinal), 
+                    token: tokenPartidaActual 
+                });
+                tokenPartidaActual = null;
+            }
+        };
+    })();
+</script>
+
+
+
+
 
 </div>

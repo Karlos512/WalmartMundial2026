@@ -3,12 +3,19 @@
   This JavaScript file is part of a copyrighted HTML5 game.
 */
 
-import audioManager from "./audio.js";
+//import audioManager from "./audio.js";
 
 /*export default */
 
 class CandyGame {
   constructor() {
+
+    //botones adcinales p compartir, repetir 
+
+    this.shareScoreBtn = document.getElementById("shareScoreBtn");
+    this.playAgainBtn = document.getElementById("playAgainBtn");
+    this.exitGameBtn = document.getElementById("exitGameBtn");
+
     this.board = [];
     this.boardSize = 8;
     this.score = 0;
@@ -985,23 +992,28 @@ class CandyGame {
 
       this.clearHint();
 
-      this.gameOverElement.classList.remove("hidden");
+      if (this.gameOverElement) this.gameOverElement.classList.remove("hidden");
+      if (this.finalScoreElement) this.finalScoreElement.textContent = this.score;
 
-      this.finalScoreElement.textContent = this.score;
+      if (!this.scoreSaved && typeof window.__DespacharScoreSeguro === "function") {
+        this.scoreSaved = true;
 
-      if (!this.scoreSaved && window.Livewire) {
-
-          this.scoreSaved = true;
-
-          Livewire.dispatch('guardar-score', {
-              score: this.score
-          });
+        const tiempoJugado = this.totalDurationInSeconds; // tiempo de la partida
+        window.__DespacharScoreSeguro(this.score, tiempoJugado);
 
       }
 
-      audioManager.playSound("gameOver");
+      if (audioManager && typeof audioManager.playSound === "function") {
+        audioManager.playSound("gameOver");
+      }
 
-      audioManager.pauseMusic();
+      if (audioManager && typeof audioManager.pauseMusic === "function") {
+        audioManager.pauseMusic();
+      }
+
+      setTimeout(() => {
+        this.destroy();
+      }, 30000); 
 
   }
 
@@ -1117,6 +1129,9 @@ class CandyGame {
 // Audio Manager Stub (in case audio.js isn't available)
 if (typeof audioManager === "undefined") {
   window.audioManager = {
+    init: function () {
+      console.log("Audio Manager inicializado de forma segura (Stub).");
+    },
     playSound: function (sound) {
       console.log("Playing sound:", sound);
     },
@@ -1140,9 +1155,7 @@ if (typeof audioManager === "undefined") {
   };
 }
 
-// Initialize the game when the DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  const game = new CandyGame();
-});
 
-window.CandyGame = CandyGame;
+window.__ArrancarCandyGameNativo = function() {
+    return new CandyGame();
+};
