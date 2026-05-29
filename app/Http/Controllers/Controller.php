@@ -55,4 +55,24 @@ class Controller extends BaseController
         return redirect(route('/'));
     }
 
+    public function RecuperaPassword(){
+        return view('UserViews.Recupera');
+    }
+
+    public function FormularioNuevoPassword($token, Request $request)
+    {
+        $usuario = User::where('email', $request->email)
+                    ->where('password_reset_token', $token)
+                    ->first();
+
+        // Si el token no coincide lo botamos
+        if (!$usuario) {
+            return redirect()->route('recupera-password')->with('error', 'Esta liga de restablecimiento no es válida o ya caducó.');
+        }
+
+        return view('UserViews.NuevoPassword', [
+            'token' => $token,
+            'email' => $request->email
+        ]);
+    }
 }

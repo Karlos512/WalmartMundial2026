@@ -34,7 +34,8 @@ class User extends Authenticatable
         'password',
         'role',
         'aceptar_terminos',
-        'aceptar_privacidad'
+        'aceptar_privacidad',
+        'password_reset_token'
     ];
     protected $primaryKey = 'id';
     public $timestamps = true;

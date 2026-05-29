@@ -42,7 +42,7 @@
                     <input type="checkbox" wire:model="recordar" class="mr-2 accent-red-600">
                     Recordarme
                 </label>
-                {{-- <a href="#" class="text-xs font-bold text-red-600 hover:underline">¿Olvidaste tu clave?</a> --}}
+                <a href="{{ route('recupera-password') }}" class="text-xs font-bold text-red-600 hover:underline">¿Olvidaste tu contraseña?</a>
             </div>
 
             <!-- Botón de Acción -->

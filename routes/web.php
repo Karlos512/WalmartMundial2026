@@ -39,3 +39,7 @@ Route::get('admin',[AdminController::class,'LoginView'])->name('admin');
 Route::get('/admin/dashboard',[AdminController::class,'DashboardView'])->name('admin-dashboard');
 
 Route::get('/admin/settings',[AdminController::class,'SettingsView'])->name('settings');
+
+Route::get('recupera-password',[Controller::class,'RecuperaPassword'])->name('recupera-password');
+
+Route::get('/restablecer-contrasena/{token}', [Controller::class, 'FormularioNuevoPassword'])->name('password.reset');
