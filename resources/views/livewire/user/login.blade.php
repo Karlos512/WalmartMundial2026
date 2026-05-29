@@ -9,6 +9,11 @@
             <h2 class="text-2xl font-black italic uppercase">¡Inicia Sesión!</h2>
             <p class="text-xs font-bold opacity-80">Ingresa para subir tus tickets y ver tus tiempos</p>
         </div>
+        @if (session()->has('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 text-sm font-semibold text-center">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <form wire:submit.prevent="login" class="p-8 space-y-6">
 

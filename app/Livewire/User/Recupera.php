@@ -50,6 +50,7 @@ class Recupera extends Component
 
         $this->reset('email');
         session()->flash('success', '¡Te hemos enviado un correo con la liga de restablecimiento!');
+        return redirect()->route('login')->with('success', '¡Excelente! Te hemos enviado un correo con la liga para restablecer tu contraseña. Revisa tu bandeja de entrada.');
     }
 
     public function render()
