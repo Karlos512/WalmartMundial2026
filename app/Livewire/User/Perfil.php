@@ -112,7 +112,7 @@ class Perfil extends Component
         $this->jugando = false;
         Session::forget('juego_token');
         Session::forget('juego_inicio_at');
-        session()->flash('error', ' pelas trmaposo');
+        Session()->flash('error', ' pelas trmaposo');
     }
 
     public function render()
