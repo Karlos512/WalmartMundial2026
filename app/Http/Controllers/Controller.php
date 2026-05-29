@@ -75,4 +75,24 @@ class Controller extends BaseController
             'email' => $request->email
         ]);
     }
+
+    public function VerificarCuenta($token, Request $request)
+    {
+        // Buscamos al usuario que coincida con el email y el token de activ
+        $usuario = User::where('email', $request->email)
+                    ->where('password_reset_token', $token)
+                    ->first();
+
+        if (!$usuario) {
+            return redirect()->route('login')->with('error', 'El enlace de verificación no es válido o ya caducó.');
+        }
+
+        // Ejecutamos el UPDATE cambiamos a true y limpiamos el token
+        $usuario->validado = true;
+        $usuario->password_reset_token = null; 
+        $usuario->save();
+
+        // Lo mandamos al login con su mensaje listo para jugar
+        return redirect()->route('login')->with('success', '¡Tu cuenta ha sido activada con éxito! Ya puedes iniciar sesión y competir.');
+    }
 }
