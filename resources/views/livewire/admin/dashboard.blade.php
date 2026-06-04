@@ -110,9 +110,38 @@
                     <i class="fas fa-file-excel mr-2"></i> Exportar Participantes
                 </button>
 
-                <button class="w-full py-4 bg-gray-800 hover:bg-blue-600 rounded-xl text-xs font-black uppercase italic transition-all border border-gray-700">
-                    <i class="fas fa-cog mr-2"></i> Ajustes del Concurso
-                </button>
+                @if(!$mostrarAjustes)
+                    <button wire:click="toggleBloqueAjustes" class="w-full py-4 bg-gray-800 hover:bg-blue-600 rounded-xl text-xs font-black uppercase italic transition-all border border-gray-700">
+                        <i class="fas fa-cog mr-2"></i> Ajustes del Concurso
+                    </button>
+                @else
+                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-2xl space-y-4 animate-fadeIn">
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                            <span class="text-xs font-black uppercase italic text-blue-500">Configuraciones</span>
+                            <button wire:click="toggleBloqueAjustes" class="text-gray-500 hover:text-white text-xs"><i class="fas fa-times"></i></button>
+                        </div>
+
+                        @if (session()->has('status_ajustes'))
+                            <p class="text-[10px] text-green-500 font-bold bg-green-500/10 p-2 rounded text-center">{{ session('status_ajustes') }}</p>
+                        @endif
+
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-xl border border-gray-700">
+                            <div>
+                                <p class="text-xs font-bold text-white">Nuevos Registros</p>
+                                <p class="text-[10px] text-gray-500">Permitir inscripciones</p>
+                            </div>
+                            <input type="checkbox" wire:model.live="registroActivo" wire:change="actualizarRegistro" class="w-4 h-4 accent-blue-600 cursor-pointer">
+                        </div>
+
+                        <div class="flex items-center justify-between bg-gray-800 p-3 rounded-xl border border-gray-700">
+                            <div>
+                                <p class="text-xs font-bold text-white">Botón de Jugar</p>
+                                <p class="text-[10px] text-gray-500">Habilitar sala de juego</p>
+                            </div>
+                            <input type="checkbox" wire:model.live="juegoActivo" wire:change="actualizarJuego" class="w-4 h-4 accent-red-600 cursor-pointer">
+                        </div>
+                    </div>
+                @endif
 
                 <div class="mt-auto p-4 bg-red-600/5 rounded-2xl border border-red-600/20 text-center">
                     <p class="text-[10px] font-bold text-red-500 uppercase mb-1">Estado del Servidor</p>
