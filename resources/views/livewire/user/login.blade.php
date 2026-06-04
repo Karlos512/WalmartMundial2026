@@ -69,10 +69,18 @@
                 </button>
             </div>
 
-            <p class="text-center text-xs font-bold text-gray-400 mt-6">
-                ¿Aún no tienes cuenta?
-                <a href="{{ route('registro') }}" class="text-red-600 hover:underline uppercase italic">Regístrate aquí</a>
-            </p>
+            @if(\App\Models\Parametros::where('parametro', 'registro_activo')->value('activo'))
+                <p class="text-center text-xs font-bold text-gray-400 mt-6">
+                    ¿Aún no tienes cuenta?
+                    <a href="{{ route('registro') }}" class="text-red-600 hover:underline uppercase italic">Regístrate aquí</a>
+                </p>
+            @else
+                <p class="text-center text-xs font-bold text-gray-500 mt-6 bg-gray-800/50 p-2 rounded-xl border border-gray-700/30">
+                    Los registros para el reto están <span class="text-red-500 uppercase italic font-black">Cerrados</span> temporalmente.
+                </p>
+            @endif
         </form>
     </div>
 </div>
+
+

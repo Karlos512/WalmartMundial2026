@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Parametros;
 
 class Login extends Component
 {

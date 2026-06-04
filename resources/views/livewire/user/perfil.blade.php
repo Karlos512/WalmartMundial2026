@@ -71,12 +71,19 @@
                             ¡A darle al juego!
                         </h2>
 
-                        <button
-                            wire:click="iniciarIntento"
-                            class="inline-block bg-red-600 hover:bg-red-700 text-white font-black italic uppercase text-sm px-12 py-3.5 rounded-xl"
-                        >
-                            ¡A Jugar!
-                        </button>
+                        @if(\App\Models\Parametros::where('parametro', 'juego_activo')->value('activo'))
+                            <button wire:click="iniciarIntento"
+                                    wire:loading.attr="disabled"
+                                    class="inline-block bg-red-600 hover:bg-red-700 text-white font-black italic uppercase text-sm px-12 py-3.5 rounded-xl transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50">
+                                <span wire:loading.remove wire:target="iniciarIntento">¡A Jugar!</span>
+                                <span wire:loading wire:target="iniciarIntento"><i class="fas fa-circle-notch animate-spin mr-2"></i> Cargando...</span>
+                            </button>
+                        @else
+                            <button disabled 
+                                    class="inline-block bg-gray-800 text-gray-500 font-black italic uppercase text-sm px-12 py-3.5 rounded-xl border border-gray-700 cursor-not-allowed">
+                                Juego Pausado
+                            </button>
+                        @endif
 
                     </div>
 
@@ -246,8 +253,5 @@
     })();
 </script>
 
-
-
-
-
 </div>
+
