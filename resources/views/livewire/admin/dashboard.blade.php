@@ -8,9 +8,6 @@
         </div>
 
         <div class="flex gap-4">
-            <a href="/admin/tickets" class="bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase px-4 py-2 rounded-lg transition-all">
-                Validar Tickets
-            </a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-gray-400 text-[10px] font-black uppercase px-4 py-2 rounded-lg border border-gray-700">
@@ -44,8 +41,8 @@
                         <i class="fas fa-clock text-yellow-600"></i>
                     </div>
                 </div>
-                <h3 class="text-gray-500 text-xs font-black uppercase tracking-tighter">Por Validar</h3>
-                <p class="text-4xl font-mono font-black italic text-yellow-500">{{ $ticketsPendientes }}</p>
+                <h3 class="text-gray-500 text-xs font-black uppercase tracking-tighter">Puntajes Por Validar</h3>
+                <p class="text-4xl font-mono font-black italic text-yellow-500">{{ $puntajePendiente }}</p>
             </div>
 
             <!-- Intentos Realizados -->

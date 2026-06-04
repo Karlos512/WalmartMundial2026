@@ -4,7 +4,7 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
-use App\Models\Tickets;
+//use App\Models\Tickets;
 use App\Models\Intentos; 
 use Carbon\Carbon;
 
@@ -12,7 +12,7 @@ class Dashboard extends Component
 {
     public $totalUsuarios = 0;
     public $nuevosHoy = 0;
-    public $ticketsPendientes = 0;
+    public $puntajePendiente = 0;
     public $totalPartidas = 0;
     public $recordGlobal = 0;
 
@@ -24,8 +24,8 @@ class Dashboard extends Component
             ->whereDate('created_at', Carbon::today())
             ->count();
 
-            ///////////pendiengte de validar par que es
-        $this->ticketsPendientes = Tickets::where('status', 'pendiente')->count();
+            ///////////pendiengte de validar par que es --------- cambiamos por partidas por validar
+        $this->puntajePendiente = Intentos::where('status', 'pendiente')->count();
 
         $this->totalPartidas = Intentos::count(); 
         
