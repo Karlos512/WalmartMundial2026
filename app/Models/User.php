@@ -35,6 +35,7 @@ class User extends Authenticatable
         'role',
         'aceptar_terminos',
         'aceptar_privacidad',
+        'created_at',
         'password_reset_token',
         'validado'
     ];
