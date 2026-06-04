@@ -34,7 +34,7 @@
                 <p class="text-4xl font-mono font-black italic">{{ number_format($totalUsuarios) }}</p>
             </div>
 
-            <!-- Tickets Pendientes -->
+            <!-- Tickets Pendientes 
             <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-xl">
                 <div class="flex justify-between items-start mb-4">
                     <div class="p-3 bg-yellow-600/10 rounded-xl">
@@ -43,7 +43,7 @@
                 </div>
                 <h3 class="text-gray-500 text-xs font-black uppercase tracking-tighter">Puntajes Por Validar</h3>
                 <p class="text-4xl font-mono font-black italic text-yellow-500">{{ $puntajePendiente }}</p>
-            </div>
+            </div>-->
 
             <!-- Intentos Realizados -->
             <div class="bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-xl">
