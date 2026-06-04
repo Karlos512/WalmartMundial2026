@@ -94,7 +94,7 @@ class Perfil extends Component
         Intentos::create([
             'user_id' => Auth::id(),
             'puntaje' => $score,
-            'status' => 'pendiente',
+            'status' => 'aprobado',
         ]);
 
         // Actualizamos el piuntale visual del usuario
