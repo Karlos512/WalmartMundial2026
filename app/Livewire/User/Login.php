@@ -29,7 +29,8 @@ class Login extends Component
         $credentials = [
             'email' => $this->correo,
             'password' => $this->password,
-            'validado' => true 
+            'validado' => true,
+            'suspendido' => false
         ];
 
         if (Auth::attempt($credentials)) {
@@ -44,11 +45,19 @@ class Login extends Component
             return redirect()->intended(route('dashboard'));
         }
 
+        // --- MANEJO DE ERRORES CUANDO FALLA EL ATTEMPT PPPPP---
         $usuarioExiste = User::where('email', $this->correo)->first();
 
-        if ($usuarioExiste && !$usuarioExiste->validado) {
-            session()->flash('error', 'Tu cuenta aún no está activa. Por favor, revisa tu correo electrónico para verificarla.');
-            return;
+        if ($usuarioExiste) {
+            if ($usuarioExiste->suspendido) {
+                session()->flash('error', 'Tu cuenta ha sido suspendida por actividad sospechosa en el sistema.');
+                return;
+            }
+
+            if (!$usuarioExiste->validado) {
+                session()->flash('error', 'Tu cuenta aún no está activa. Por favor, revisa tu correo electrónico para verificarla.');
+                return;
+            }
         }
 
         session()->flash('error', 'Las credenciales ingresadas son incorrectas o no coinciden con nuestros registros.');
