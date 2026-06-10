@@ -181,8 +181,17 @@
                     <i class="fas fa-users-cog mr-2"></i> Ver Participantes
                 </button>
 
-                <button class="w-full py-4 bg-gray-800 hover:bg-red-600 rounded-xl text-xs font-black uppercase italic transition-all border border-gray-700">
-                    <i class="fas fa-file-excel mr-2"></i> Exportar Participantes
+                <button wire:click="exportarExcel"
+                        wire:loading.attr="disabled"
+                        class="w-full py-4 bg-gray-800 hover:bg-red-600 rounded-xl text-xs font-black uppercase italic transition-all border border-gray-700 flex justify-center items-center disabled:opacity-50">
+                    
+                    <span wire:loading.remove wire:target="exportarExcel">
+                        <i class="fas fa-file-excel mr-2"></i> Exportar Participantes
+                    </span>
+
+                    <span wire:loading wire:target="exportarExcel" class="flex items-center">
+                        <i class="fas fa-circle-notch animate-spin mr-2"></i> Generando archivo...
+                    </span>
                 </button>
 
                 @if(!$mostrarAjustes)

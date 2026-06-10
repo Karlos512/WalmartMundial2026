@@ -9,6 +9,8 @@ use App\Models\Intentos;
 use App\Models\Parametros;
 use Carbon\Carbon;
 use Livewire\WithPagination; 
+use App\Exports\ParticipantesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Dashboard extends Component
 {
@@ -24,6 +26,14 @@ class Dashboard extends Component
     public $vistaActual = 'dashboard'; 
     public $usuarioSeleccionadoId;
     public $search = ''; 
+
+     public function exportarExcel()
+    {
+        $fechaActual = Carbon::now()->format('d-m-Y');
+        
+        return Excel::download(new ParticipantesExport, "participantes_reto_{$fechaActual}.xlsx");
+    }
+
 
     public function mount()
     {
