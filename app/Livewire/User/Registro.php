@@ -91,10 +91,12 @@ class Registro extends Component
             'role' => 'participante',
             'aceptar_terminos'  => $this->aceptar_terminos,
             'aceptar_privacidad'=> $this->aceptar_privacidad,
-            
+
             // Tus dos campos clave de control
-            'validado' => false, 
+            'validado' => false,
             'password_reset_token' => $tokenVerificacion,
+            'suspendido' => false,
+
         ]);
 
         $ligaVerificacion = route('cuenta.verificar', ['token' => $tokenVerificacion, 'email' => $user->email]);
@@ -108,13 +110,13 @@ class Registro extends Component
                             <p>Hola <strong>{$user->name}</strong>,</p>
                             <p>Tu registro se ha realizado con éxito en nuestra plataforma de competencia.</p>
                             <p>Para poder ingresar, confirmar tu identidad y comenzar a acumular puntos, es necesario que actives tu cuenta haciendo clic en el siguiente botón:</p>
-                            
+
                             <div style='text-align: center; margin: 30px 0;'>
                                 <a href='{$ligaVerificacion}' style='background-color: #e30613; color: white; padding: 12px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; text-transform: uppercase;'>
                                     Confirmar mi correo
                                 </a>
                             </div>
-                            
+
                             <p style='font-size: 11px; color: #aaa; text-align: center;'>Si tú no realizaste este registro, puedes ignorar este correo de forma segura.</p>
                         </div>
                     ");

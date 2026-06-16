@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre de tu Proyecto - El Reto</title>
+    <title>La sede el momento</title>
     @stack('styles')
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -44,7 +44,10 @@
                 Supera los obstáculos, registra tu ticket y compite por grandes premios.
             </p>
             <div class="bg-white p-4 rounded-lg inline-block text-black font-bold">
-                CÓDIGO DE LA ISLA: <span class="text-brand">0000-0000-0000</span>
+                {{-- CÓDIGO DE LA ISLA: <span class="text-brand">0000-0000-0000</span> --}}
+                <button onclick="window.location='{{ route('registro') }}'" class="bg-brand text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition">
+                    Registrate
+                </button>
             </div>
         </div>
     </header>
@@ -108,15 +111,15 @@
                     <tbody class="divide-y divide-gray-200">
                         @forelse($ranking as $index => $intento)
                             <tr class="hover:bg-gray-50 transition">
-                                <td class="px-6 py-4 font-black italic text-xl 
+                                <td class="px-6 py-4 font-black italic text-xl
                                     {{ $index + 1 == 1 ? 'text-yellow-500' : ($index + 1 == 2 ? 'text-gray-400' : ($index + 1 == 3 ? 'text-amber-600' : 'text-gray-600')) }}">
                                     {{ $index + 1 }}
                                 </td>
-                                
+
                                 <td class="px-6 py-4 font-semibold text-gray-700 italic">
                                     {{ $intento->user->nickname ?? 'Gamer Anónimo' }}
                                 </td>
-                                
+
                                 <td class="px-6 py-4 font-mono font-bold text-brand">
                                     {{ number_format($intento->mejor_puntaje) }} pts
                                 </td>

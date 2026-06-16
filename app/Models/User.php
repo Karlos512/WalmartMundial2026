@@ -37,7 +37,8 @@ class User extends Authenticatable
         'aceptar_privacidad',
         'created_at',
         'password_reset_token',
-        'validado'
+        'validado',
+        'suspedido'
     ];
     protected $primaryKey = 'id';
     public $timestamps = true;
